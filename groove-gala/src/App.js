@@ -1,6 +1,9 @@
 import Home from "./pages/Home.js";
 import OrgPage from "./pages/OrgPage.js";
 import ScrollToTop from "./components/ScrollToTop.js";
+import AdminPage from "./pages/AdminPage.js";
+import AdminUser from "./pages/AdminUser.js";
+import AdminOrg from "./pages/AdminOrg.js";
 import {
   BrowserRouter as Router,
   Routes,
@@ -17,6 +20,9 @@ function App() {
         <Route path='/' element={<Home />}></Route>
         <Route path='/singleOrg' element={<OrgPage />}></Route>
         <Route path='/singleFest' element={<FestPage />}></Route>
+        <Route path='/adminMain' element={<AdminPage />}></Route>
+        <Route path='/adminUser' element={<AdminUser />}></Route>
+        <Route path='/adminOrg' element={<AdminOrg />}></Route>
       </Routes>
     </Router>
   );

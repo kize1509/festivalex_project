@@ -1,0 +1,38 @@
+
+.admin-main{
+    height: 990px;
+    background-color: #00246B;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+
+.admin-main-btn{
+    margin: 10px;
+    background-color: #00246B;
+    border: 2px solid #EA738D;
+    border-radius: 30px;
+    box-shadow: #EA738D 4px 4px 0 0;
+    color: #EA738D;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 18px;
+    padding: 0 18px;
+    line-height: 50px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.admin-main-btn:hover {
+    background-color: #CADCFC;
+  }
+  
+  .admin-main-btn:active {
+    box-shadow: #EA738D 2px 2px 0 0;
+    transform: translate(2px, 2px);
+  }

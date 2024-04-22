@@ -1,0 +1,269 @@
+
+.user-container{
+    height: 80%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    margin: 2%;
+    border: 3px solid #EA738D;
+    border-radius: 30px;
+    box-shadow: 5px 5px 2px #EA738D;
+    flex-wrap: wrap;
+    background-color: #CADCFC;
+}
+
+
+.col{
+    width: 30%;
+    margin: 1%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%    ;
+    
+}
+
+.col-container{
+    margin-bottom: 5%;
+    width: 100%;
+    border-radius: 30px;
+    display: flex;
+    
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+
+
+.user-data-item{
+    box-shadow: #EA738D 0px 5px 15px;
+    border-radius: 30px;
+    margin-bottom: 2%;
+    display: flex;
+    direction: row;
+    width: 100%;
+    justify-content: baseline;
+    align-items: center;
+    position: relative;
+    
+}
+
+.user-prop{
+    height: 100%;
+    border: 4px solid #EA738D;
+    border-radius: 30px;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    padding: 1%;
+    background-color: #00246B;
+}
+
+.user-value{
+    all: unset;
+    text-align: center;
+    width: 50%;
+    user-select: none;
+    user-select: none;
+    font-family: "Noto Sans JP", sans-serif;
+    font-optical-sizing: auto;
+    font-weight:1000;
+    font-style: normal;
+    font-size: 80%;
+    color: #EA738D;
+    
+}
+
+
+.prop-head{
+    user-select: none;
+    font-family: "Noto Sans JP", sans-serif;
+    font-optical-sizing: auto;
+    font-weight:1000;
+    font-style: normal;
+    font-size: 100%;
+    color: #EA738D;
+}
+
+.del-edit-ics{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2%;
+}
+
+
+.del-btn, .edit-btn {
+
+    margin: 10px;
+    background-color: #EA738D;
+    border: 2px solid #00246B;
+    border-radius: 30px;
+    box-shadow: #00246B 4px 4px 0 0;
+    color: #00246B;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 0 18px;
+    line-height: 50px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 10%;
+    
+  }
+  
+  .del-btn:hover {
+    background-color: #CADCFC;
+  }
+  
+  .del-btn:active {
+    box-shadow: #EA738D 2px 2px 0 0;
+    transform: translate(2px, 2px);
+  }
+
+  .edit-btn:hover {
+    background-color: #CADCFC;
+  }
+  
+  .edit-btn:active {
+    box-shadow: #EA738D 2px 2px 0 0;
+    transform: translate(2px, 2px);
+  }
+
+  .del-btn-img, .edit-btn-img{
+    width: 25%;
+  }
+
+  .check-x, .check-done{
+    width: 2%;
+    position: absolute;
+    left: 3%;
+    bottom: 26%;
+    transition: visibility 0.1s ease-in-out;
+    border-radius: 50%;
+  }
+
+  .check-x{
+    background-color: red;
+  }
+
+  .check-done{
+    background-color: green;
+  }
+
+  .active-state {
+    visibility: visible; 
+  }
+  
+  .inactive-state {
+    visibility: hidden; 
+  }
+
+
+  @media  screen and (max-width: 1426px) {
+
+    .del-btn, .edit-btn{
+        width: 12%;
+    }
+    .col-container{
+        margin-bottom: 2%;
+    }
+    .prop-head{
+        font-size: 80%;
+    }
+    .check-done, .check-x{
+        width: 2.8%;
+        bottom: 20%;
+    }
+    .user-value{
+        font-size: 70%;
+    }
+    
+  }
+
+  @media screen and (max-width: 1146px) {
+    
+    
+    .del-btn, .edit-btn{
+        width: 14%;
+    }
+    .prop-head{
+        font-size: 60%;
+    }
+    .check-done, .check-x{
+        width: 2%;
+        bottom: 20%;
+    }
+    .user-value{
+        font-size: 60%;
+    }
+
+  }
+
+  @media  screen and (max-width: 892px) {
+    
+
+    .del-btn, .edit-btn{
+        width: 14%;
+    }
+    .prop-head{
+        font-size: 50%;
+    }
+    .check-done, .check-x{
+        width: 1%;
+        bottom: 25%;
+    }
+    .user-value{
+        font-size: 50%;
+    }
+
+
+  }
+
+  @media screen and (max-width: 768px) {
+    .col{
+        width: 80%;
+    }
+
+    .del-btn, .edit-btn{
+        width: 24%;
+    }
+    .prop-head{
+        font-size: 80%;
+    }
+    .check-done, .check-x{
+        width: 2%;
+        bottom: 23%;
+    }
+    .user-value{
+        font-size: 80%;
+    }
+
+  }
+
+
+  @media screen and (max-width: 430px) {
+    .del-btn, .edit-btn{
+        width: 30%;
+    }
+    .prop-head{
+        font-size: 60%;
+    }
+    .check-done, .check-x{
+        width: 1%;
+        bottom: 26%;
+    }
+    .user-value{
+        font-size: 6    0%;
+    }
+  }

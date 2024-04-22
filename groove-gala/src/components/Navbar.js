@@ -5,6 +5,10 @@ import { useEffect } from "react";
 import { useRef } from "react";
 
 function Navbar() {
+  const handleBtnClick = () => {
+    navigate("/adminMain");
+  };
+
   let navbarClasses = "navbar-regular";
 
   const heightRef = useRef(null);
@@ -40,7 +44,9 @@ function Navbar() {
           GROOVE GALA
         </h2>
         <ul className='nav-list'>
-          <button className='logButton'>LOGIN</button>
+          <button className='logButton' onClick={handleBtnClick}>
+            LOGIN
+          </button>
           <button className='signButton'>REGISTER</button>
         </ul>
       </div>
