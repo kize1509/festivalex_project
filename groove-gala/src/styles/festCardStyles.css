@@ -1,0 +1,64 @@
+.FestCard{
+    height: 350px;
+    border: 3px solid #EA738D;
+    border-radius: 30px;
+    box-shadow: 5px 5px 2px #EA738D;
+    margin: 30px;
+    padding: 10px;
+    text-align: center;
+    width: 270px;
+    display: inline-block;
+    background-color: #CADCFC;
+    transition: box-shadow 0.3s ease; 
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .FestCard:hover {
+    box-shadow: 10px 15px 10px #EA738D;
+  }
+  
+  .fest-image{
+    width: 90%;
+    height: 45%;
+    border: 4px solid #00246B;
+    margin-bottom: 10px;
+    border-radius: 10%;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5 );
+    transition: box-shadow 0.3s ease, transform 0.3s ease; 
+  }
+  .fest-image:hover {
+
+    box-shadow: 0px 20px 15px #000000;
+    transform: scale(1.1)
+  }
+  .fest-title{
+    color: #EA738D;
+    font-size: x-large;
+    font-family: "Archivo Black", sans-serif;
+    font-weight: 200;
+    font-style: normal;   
+    margin: 0;
+    user-select: none;
+  }
+  
+  .fest-description{
+    padding-top: 10px;
+    user-select: none;
+    color: #EA738D;
+    font-size: small;
+    overflow: hidden;
+    text-align: center;
+    font-family: "Noto Sans JP", sans-serif;
+    font-optical-sizing: auto;
+    font-weight:300;
+    font-style: normal;
+    overflow:hidden
+  }
+
+
+  @media  screen and (max-width: 768px) {
+    .FestCard{
+      width: 250px;
+    }
+  }

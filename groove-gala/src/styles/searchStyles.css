@@ -1,0 +1,24 @@
+.search{
+    width: 30%;
+    height: 50px;
+    cursor: pointer;
+}
+
+input{
+    border: 5px solid #EA738D;
+    border-radius: 30px;
+    width: 90%;
+    height: 100%;
+    text-align: center;
+    font-size:large;
+    font-family: "Archivo Black", sans-serif;
+    font-weight: 100;
+    font-style: normal;  
+    transition: transform 0.1s ease;
+    
+}
+
+input:focus{
+    outline: none;
+    transform: scale(1.05);
+}

@@ -1,0 +1,154 @@
+nav{
+  background-color: #CADCFC;
+  border: 7px solid #EA738D;
+  border-radius: 5px;
+  margin: 0;
+  height: 100px;
+  position: sticky;
+  z-index: 2;
+}
+
+
+.nav-list{
+  display: inline;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 7%;
+  padding-top: 0;
+  padding-left: 0;
+  
+}
+.heading{
+  margin-left: 5%;
+  font-family: "Archivo Black", sans-serif;
+  font-weight: 200;
+  font-style: normal;   
+  font-size: 35px;
+  color: #fdfdfe;
+  text-shadow: 0px 0px 5px #EA738D, 0px 0px 10px #00246B, 0px 0px 10px #EA738D,
+    0px 0px 20px #00246B;
+  cursor: pointer;
+  user-select: none;
+}
+
+.nav-container{
+  padding: 1%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+
+h3{
+  color: #CADCFC;
+}
+
+
+
+.logButton {
+  margin: 10px;
+  background-color: #00246B;
+  border: 2px solid #EA738D;
+  border-radius: 30px;
+  box-shadow: #EA738D 4px 4px 0 0;
+  color: #EA738D;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.signButton {
+
+  margin: 10px;
+  background-color: #EA738D;
+  border: 2px solid #00246B;
+  border-radius: 30px;
+  box-shadow: #00246B 4px 4px 0 0;
+  color: #00246B;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.logButton:hover {
+  background-color: #CADCFC;
+}
+
+.logButton:active {
+  box-shadow: #EA738D 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+.signButton:hover {
+  background-color: #CADCFC;
+} 
+
+.signButton:active {
+  box-shadow: #00246B 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  .signButton, .logButton {
+    min-width: 120px;
+    padding: 0 0px;
+  }
+}
+
+@media  screen and (max-width: 768px) {
+  .signButton, .logButton {
+    width: 80%;
+    height: 30%;
+    padding: 0 25px;
+    font-size: 12px
+  }
+  .heading{
+    font-size: 25px;
+    margin-top: 10px;
+    margin-bottom: 0;
+    padding: 0;
+  }
+  .nav-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0;
+    
+  }
+  .nav-list{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0;
+  }
+  nav{
+   height: 150px;
+   padding: 0;
+   margin: 0;
+   position: sticky;
+  }   
+}
+
+.scrolled{
+  position: sticky;
+  top: 0;
+}

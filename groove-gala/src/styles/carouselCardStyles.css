@@ -1,0 +1,100 @@
+.festivals-title{
+    font-family: "Archivo Black", sans-serif;
+    font-weight: 200;
+    font-style: normal;   
+    font-size: large;
+    color: #fdfdfe;
+    text-shadow: 0px 0px 5px #EA738D, 0px 0px 10px #00246B, 0px 0px 10px #EA738D,
+      0px 0px 20px #00246B;
+    cursor: pointer;
+    user-select: none;
+    margin-top: auto;
+}
+
+.festivals-card{
+    height: 350px;
+    border: 3px solid #EA738D;
+    border-radius: 30px;
+    box-shadow: 5px 5px 2px #EA738D;
+    margin: 2%;
+    padding: 0;
+    text-align: center;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    width: 40%;
+    flex-direction: column;
+    background-color: #00246B;
+    transition: box-shadow 0.3s ease, transform 0.1s ease-in-out; 
+    align-items: center;
+    cursor: pointer;
+}
+
+.festivals-card:hover {
+  box-shadow: 10px 15px 10px #EA738D;
+  transform: scale(1.05);
+}
+
+.more-button {
+
+    background-color: #CADCFC;
+    border: 2px solid #EA738D;
+    border-radius: 30px;
+    box-shadow: #EA738D 4px 4px 0 0;
+    color: #EA738D;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 0 18px;
+    line-height: 50px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .more-button:hover {
+    background-color: #00246B;
+  }
+  
+  .more-button:active {
+    box-shadow: #EA738D 2px 2px 0 0;
+    transform: translate(2px, 2px);
+  }
+  
+
+
+@media screen and (min-width: 768px){
+    .festivals-card{
+        width: 40%;
+
+    }
+
+    .festivals-title{
+        margin-top: 2%;
+    }
+
+    .more-button{
+        margin-top: 2%;
+        margin-bottom: 2%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .festivals-card{
+        width: 90%;
+        margin-top: 10%;
+
+    }
+
+    .festivals-title{
+        margin: 5%;
+    }
+    .more-button{
+        margin-bottom: 5%;
+
+    }
+
+}

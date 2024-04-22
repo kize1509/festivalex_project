@@ -1,0 +1,204 @@
+
+
+
+.profile-display{
+    box-shadow: #EA738D 0px 25px 35px;
+    margin: 5%;
+    position: relative;
+    width: 70%;
+    display: flex;
+    height: 1000px;
+    flex-direction: column;
+    border-radius: 10px;
+    border: 3px solid #CADCFC;
+    background-color:#CADCFC ;
+    z-index: 1;
+    align-items: center;
+}
+
+
+
+.festivals-box{
+    position: relative;
+    display: flex;
+    height: 70%;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 10px;
+    align-items: center;
+    border: 3px solid #CADCFC;
+    margin-bottom: auto;
+    background-color:#CADCFC ;
+    margin-bottom: 0;
+}
+
+
+
+
+.heading-container{
+    margin-top: 2%;
+    width: 100%;
+    height: 10%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0;
+    
+}
+
+
+.caption-heading{
+
+    user-select: none;
+    font-family: "Noto Sans JP", sans-serif;
+    font-optical-sizing: auto;
+    font-weight:500;
+    font-style: normal;
+    overflow:hidden;
+    font-size: 1rem;
+    color: #CADCFC;
+}
+
+
+.caption-container{
+    margin-top: 1%;
+    box-shadow: #EA738D 0px 5px 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #EA738D;
+    border-radius: 20px;
+    width: 70%;
+    padding: 1%;
+}
+
+.festival-name{
+    text-align: center;
+    margin-bottom: 0;
+    font-family: "Archivo Black", sans-serif;
+    font-weight: 200;
+    font-style: normal;   
+    font-size: 150%;
+    color: #fdfdfe;
+    text-shadow: 0px 0px 5px #EA738D, 0px 0px 10px #00246B, 0px 0px 10px #EA738D,
+      0px 0px 20px #00246B;
+    user-select: none;
+    border-radius: 30px;
+    padding: 2%;
+    box-shadow: #EA738D 0px 5px 15px;
+
+}
+
+.fest-data-container{
+    margin-top: 0;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    }
+
+
+.info-item{
+    box-shadow: #EA738D 0px 5px 15px;
+    border-radius: 30px;
+    margin-bottom: 2%;
+    display: flex;
+    direction: row;
+    width: 100%;
+    justify-content: baseline;
+    align-items: center;
+    
+}
+
+.property-field{
+    border: 4px solid #EA738D;
+    border-radius: 30px;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    padding: 1%;
+    background-color: #00246B;
+}
+
+.property{
+    user-select: none;
+    font-family: "Noto Sans JP", sans-serif;
+    font-optical-sizing: auto;
+    font-weight:1000;
+    font-style: normal;
+    font-size: 100%;
+    color: #EA738D;
+}
+
+.fest-value{
+    margin-left: 20%;
+    user-select: none;
+    font-family: "Noto Sans JP", sans-serif;
+    font-optical-sizing: auto;
+    font-weight:1000;
+    font-style: normal;
+    font-size: 130%;
+    color: #EA738D;
+    padding-right: 1.5%;
+}
+
+
+
+
+
+@media screen and (max-width: 768px) {
+    .profile-display{
+        width: 90%;
+        height: fit-content;
+        padding: 5% 0% 5%;
+    }
+    
+    .fest-value{
+        font-size: 100%;
+        width: 50%;
+        margin: 0;
+        text-align: center;
+    }    
+
+    .info-item{
+        justify-content: space-around;
+    }
+
+
+    .festival-name{
+        font-size: 100%;
+    }
+
+    .festivals-box{
+        height: 40%;
+    }
+
+    .festivals-box{
+        justify-content: start;
+    }
+
+    .heading-container{
+        margin-top: 2%;
+    }
+
+    .caption-container{
+        width: 90%;
+        padding: 2%;
+        opacity: 0.6;
+        margin-bottom: 0;
+    }
+
+    .caption-heading{
+        font-size: 80%;
+    }
+
+    .fest-data-container{
+        width: 90%;
+        margin-top: 5%;
+        margin-bottom: 15%;
+    }
+}
