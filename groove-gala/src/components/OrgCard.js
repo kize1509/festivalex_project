@@ -2,7 +2,6 @@ import "../styles/orgCardStyles.css";
 import phone from "../data/phone.svg";
 import mail from "../data/mail.svg";
 import { useEffect, useState } from "react";
-import { useAnimate, useInView, motion } from "framer-motion";
 
 function OrgCard({ data }) {
   const [address, setAddress] = useState(false);
