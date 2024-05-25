@@ -1,193 +1,188 @@
-import "../styles/orgAdminStyles.css";
+import "../styles/userCardStyles.css";
 import del from "../data/delete.svg";
 import edit from "../data/edit.svg";
 import x from "../data/x.svg";
-import jsonData from "../data/data.json";
 import done from "../data/done_FILL0_wght400_GRAD0_opsz24.svg";
 import { useState } from "react";
 import { useEffect } from "react";
-import Dropdown from "./Dropdown.js";
+import ImageSlider from "./Carousel";
+import React from "react";
 
-function AdminOrgCard({ org, index, onDelete }) {
-  const [festData, setFestData] = useState([]);
-
-  useEffect(() => {
-    const data = [];
-    let fests = jsonData.festivali[org.festivals];
-    for (const festKey in fests) {
-      data.push(fests[festKey].naziv);
-    }
-    setFestData(data);
-  }, []);
-
+function AdminFestCard({ fest, images, index, onDelete }) {
   const [inputState, setInputState] = useState(true);
 
   function handleDelClick() {
     onDelete(index);
   }
 
-  function toggleStatus() {
+  const toggleStatus = () => {
     if (inputState) {
       setInputState(false);
     } else {
       setInputState(true);
     }
-  }
+  };
 
   return (
-    <div className='orgz-container'>
-      <form className='col-org-container'>
-        <div className='col-org'>
-          <div className='org-data-item'>
-            <div className='orgz-prop'>
-              <h5 className='prop-headz'>ORGANIZATOR</h5>
+    <div className='user-container'>
+      <form className='col-container'>
+        <div className='col'>
+          <div className='user-data-item'>
+            <div className='user-prop'>
+              <h5 className='prop-head'>NAME</h5>
             </div>
             <input
-              className='org-value'
-              placeholder={org.name}
+              className='user-value'
+              placeholder={fest.naziv}
               disabled={inputState}
             />
             <img
-              className={`check-x-org ${
+              className={`check-x ${
                 inputState ? "active-state" : "inactive-state"
               }`}
               src={x}
             />
             <img
-              className={`check-done-org ${
+              className={`check-done ${
                 inputState ? "inactive-state" : "active-state"
               }`}
               src={done}
             />
           </div>
-          <div className='org-data-item'>
-            <div className='orgz-prop'>
-              <h5 className='prop-headz'>ADDRESS</h5>
+          <div className='user-data-item'>
+            <div className='user-prop'>
+              <h5 className='prop-head'>DESCRIPTION</h5>
             </div>
             <input
-              className='org-value'
-              placeholder={org.address}
+              className='user-value'
+              placeholder={fest.opis}
               disabled={inputState}
             />
             <img
-              className={`check-x-org ${
+              className={`check-x ${
                 inputState ? "active-state" : "inactive-state"
               }`}
               src={x}
             />
             <img
-              className={`check-done-org ${
+              className={`check-done ${
                 inputState ? "inactive-state" : "active-state"
               }`}
               src={done}
             />
           </div>
-          <div className='org-data-item'>
-            <div className='orgz-prop'>
-              <h5 className='prop-headz'>SINCE</h5>
+          <div className='user-data-item'>
+            <div className='user-prop'>
+              <h5 className='prop-head'>MAX PEOPLE</h5>
             </div>
             <input
-              className='org-value'
-              placeholder={org.year}
+              className='user-value'
+              placeholder={fest.maxOsoba}
               disabled={inputState}
             />
             <img
-              className={`check-x-org ${
+              className={`check-x ${
                 inputState ? "active-state" : "inactive-state"
               }`}
               src={x}
             />
             <img
-              className={`check-done-org ${
-                inputState ? "inactive-state" : "active-state"
-              }`}
-              src={done}
-            />
-          </div>
-        </div>
-        <div className='col-org'>
-          <div className='org-data-item'>
-            <div className='orgz-prop'>
-              <h5 className='prop-headz'>PHONE</h5>
-            </div>
-            <input
-              className='org-value'
-              placeholder={org.telephone}
-              disabled={inputState}
-            />
-            <img
-              className={`check-x-org ${
-                inputState ? "active-state" : "inactive-state"
-              }`}
-              src={x}
-            />
-            <img
-              className={`check-done-org ${
-                inputState ? "inactive-state" : "active-state"
-              }`}
-              src={done}
-            />
-          </div>
-          <div className='org-data-item'>
-            <div className='orgz-prop'>
-              <h5 className='prop-headz'>EMAIL</h5>
-            </div>
-            <input
-              className='org-value'
-              placeholder={org.email}
-              disabled={inputState}
-            />
-            <img
-              className={`check-x-org ${
-                inputState ? "active-state" : "inactive-state"
-              }`}
-              src={x}
-            />
-            <img
-              className={`check-done-org ${
-                inputState ? "inactive-state" : "active-state"
-              }`}
-              src={done}
-            />
-          </div>
-          <div className='org-data-item'>
-            <div className='orgz-prop'>
-              <h5 className='prop-headz'>LOGO</h5>
-            </div>
-            <input
-              className='org-value'
-              type='file'
-              accept='image/png'
-              disabled={inputState}
-            />
-            <img
-              className={`check-x-org ${
-                inputState ? "active-state" : "inactive-state"
-              }`}
-              src={x}
-            />
-            <img
-              className={`check-done-org ${
+              className={`check-done ${
                 inputState ? "inactive-state" : "active-state"
               }`}
               src={done}
             />
           </div>
         </div>
-        <div className='col-org'>
-          <Dropdown options={festData} />
+        <div className='col'>
+          <div className='user-data-item'>
+            <div className='user-prop'>
+              <h5 className='prop-head'>TYPE</h5>
+            </div>
+            <input
+              className='user-value'
+              placeholder={fest.tip}
+              disabled={inputState}
+            />
+            <img
+              className={`check-x ${
+                inputState ? "active-state" : "inactive-state"
+              }`}
+              src={x}
+            />
+            <img
+              className={`check-done ${
+                inputState ? "inactive-state" : "active-state"
+              }`}
+              src={done}
+            />
+          </div>
+          <div className='user-data-item'>
+            <div className='user-prop'>
+              <h5 className='prop-head'>TRAVEL TYPE</h5>
+            </div>
+            <input
+              className='user-value'
+              placeholder={fest.prevoz}
+              disabled={inputState}
+            />
+            <img
+              className={`check-x ${
+                inputState ? "active-state" : "inactive-state"
+              }`}
+              src={x}
+            />
+            <img
+              className={`check-done ${
+                inputState ? "inactive-state" : "active-state"
+              }`}
+              src={done}
+            />
+          </div>
+          <div className='user-data-item'>
+            <div className='user-prop'>
+              <h5 className='prop-head'>PRICE</h5>
+            </div>
+            <input
+              className='user-value'
+              placeholder={fest.cena}
+              disabled={inputState}
+            />
+            <img
+              className={`check-x ${
+                inputState ? "active-state" : "inactive-state"
+              }`}
+              src={x}
+            />
+            <img
+              className={`check-done ${
+                inputState ? "inactive-state" : "active-state"
+              }`}
+              src={done}
+            />
+          </div>
+        </div>
+        <div className='col'>
+          <div className='user-prop'>
+            <h5 className='prop-head'>PHOTOS</h5>
+          </div>
+          <ImageSlider
+            images={images}
+            sliderStyle={"slider-profile"}
+            imagesStyle={"images-profile"}
+          />
         </div>
       </form>
-      <div className='del-edit-ics-org'>
-        <button className='del-btn-org' onClick={handleDelClick}>
-          <img className='del-btn-org-img' src={del} />
+      <div className='del-edit-ics'>
+        <button className='del-btn' onClick={handleDelClick}>
+          <img className='del-btn-img' src={del} />
         </button>
-        <button className='edit-btn-org' onClick={toggleStatus}>
-          <img className='edit-btn-org-img' src={edit} />
+        <button className='edit-btn' onClick={toggleStatus}>
+          <img className='edit-btn-img' src={edit} />
         </button>
       </div>
     </div>
   );
 }
 
-export default AdminOrgCard;
+export default React.memo(AdminFestCard);

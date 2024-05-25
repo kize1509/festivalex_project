@@ -4,7 +4,7 @@
     cursor: pointer;
 }
 
-input{
+.search-input{
     border: 5px solid #EA738D;
     border-radius: 30px;
     width: 90%;
@@ -18,7 +18,7 @@ input{
     
 }
 
-input:focus{
+.search-input:focus{
     outline: none;
     transform: scale(1.05);
 }

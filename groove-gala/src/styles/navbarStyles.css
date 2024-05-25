@@ -152,3 +152,79 @@ h3{
   position: sticky;
   top: 0;
 }
+
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-container {
+  background: white;
+  padding: 20px;
+  width: 40%;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 18px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+
+
+
+
+@media screen and (min-width: 320px) {
+  .popup-container{
+    width: 80%;
+    height: 70%;
+  }
+}
+
+
+@media screen and (min-width: 375px) {
+
+  .popup-container{
+    width: 80%;
+    height: 60%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .popup-container{
+    width: 70%;
+    height: 55%;
+  }}
+
+@media screen and (min-width: 992px) {
+  .popup-container{
+    width: 60%;
+    height: 52%;
+  }}
+
+@media screen and (min-width: 1200px) {
+  .popup-container{
+    width: 50%;
+    height: 72%
+  }}
+
+@media screen and(min-width: 1440px) {
+  .popup-container{
+    width: 40%;
+  }}
+
+@media screen and (min-width: 1920px) {
+  .popup-container{
+    width: 40%;
+    
+  }}
