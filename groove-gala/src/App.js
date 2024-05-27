@@ -4,7 +4,8 @@ import ScrollToTop from "./components/ScrollToTop.js";
 import AdminPage from "./pages/AdminPage.js";
 import AdminUser from "./pages/AdminUser.js";
 import AdminOrg from "./pages/AdminOrg.js";
-import AdminFest from "./pages/AdminFest.js";
+import NewFestPage from "./pages/NewFestivalPage.js";
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -24,7 +25,7 @@ function App() {
         <Route path='/adminMain' element={<AdminPage />}></Route>
         <Route path='/adminUser' element={<AdminUser />}></Route>
         <Route path='/adminOrg' element={<AdminOrg />}></Route>
-        <Route path='/adminFest' element={<AdminFest />}></Route>
+        <Route path='/newFestPage' element={<NewFestPage />}></Route>
       </Routes>
     </Router>
   );

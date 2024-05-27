@@ -1,10 +1,62 @@
-function ListComponent({ name }) {
+import "../styles/ListItemStyles.css";
+import edit from "../data/edit_black.svg";
+import del from "../data/delete_black.svg";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import DeleteDialog from "./dialogs/DeleteDialog";
+
+function ListComponent({ data, index, onDelete }) {
+  console.log("LIST COMPONENT ", data);
+  const navigate = useNavigate();
+
+  const handleBtnClick = () => {
+    navigate("/newFestPage", { state: data });
+  };
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+
+  const handleDeleteClick = () => {
+    setShowDeleteDialog(true);
+  };
+
+  const handleConfirmDelete = () => {
+    onDelete(index);
+    setShowDeleteDialog(false);
+  };
+
+  const handleCloseDialog = () => {
+    setShowDeleteDialog(false);
+  };
+
   return (
-    <div className='org-data-item'>
-      <div className='orgz-prop'>
-        <h5 className='prop-headz'>NAME</h5>
+    <div className='item-list-dd'>
+      {showDeleteDialog && (
+        <>
+          <div className='dd-backdrop' onClick={handleCloseDialog}></div>
+          <DeleteDialog
+            text={data.naziv}
+            type={"FESTIVAL"}
+            onClose={handleCloseDialog}
+            onConfirm={handleConfirmDelete}
+          />
+        </>
+      )}
+      <div className='icons-dd'>
+        <img
+          src={edit}
+          className='icon-dd'
+          onClick={handleBtnClick}
+          alt='Edit'
+        />
+        <img
+          src={del}
+          className='icon-dd'
+          onClick={handleDeleteClick}
+          alt='Delete'
+        />
       </div>
-      <input className='org-value' placeholder={name} />
+      <div className='fest-heading-dd'>
+        <p className='heading-dd'>{data.naziv}</p>
+      </div>
     </div>
   );
 }

@@ -4,13 +4,25 @@ import edit from "../data/edit.svg";
 import x from "../data/x.svg";
 import done from "../data/done_FILL0_wght400_GRAD0_opsz24.svg";
 import { useState } from "react";
+import DeleteDialog from "./dialogs/DeleteDialog";
 
 function UserCard({ user, index, onDelete }) {
   const [inputState, setInputState] = useState(true);
 
-  function handleDelClick() {
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+
+  const handleDeleteClick = () => {
+    setShowDeleteDialog(true);
+  };
+
+  const handleConfirmDelete = () => {
     onDelete(index);
-  }
+    setShowDeleteDialog(false);
+  };
+
+  const handleCloseDialog = () => {
+    setShowDeleteDialog(false);
+  };
 
   function toggleStatus() {
     if (inputState) {
@@ -22,6 +34,17 @@ function UserCard({ user, index, onDelete }) {
 
   return (
     <div className='user-container'>
+      {showDeleteDialog && (
+        <>
+          <div className='dd-backdrop' onClick={handleCloseDialog}></div>
+          <DeleteDialog
+            text={user.korisnickoIme}
+            type={"USER"}
+            onClose={handleCloseDialog}
+            onConfirm={handleConfirmDelete}
+          />
+        </>
+      )}
       <form className='col-container'>
         <div className='col'>
           <div className='user-data-item'>
@@ -229,7 +252,7 @@ function UserCard({ user, index, onDelete }) {
         </div>
       </form>
       <div className='del-edit-ics'>
-        <button className='del-btn' onClick={handleDelClick}>
+        <button className='del-btn' onClick={handleDeleteClick}>
           <img className='del-btn-img' src={del} />
         </button>
         <button className='edit-btn' onClick={toggleStatus}>

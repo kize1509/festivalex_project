@@ -5,21 +5,25 @@ import FestivalsCard from "../components/FestivalsCard";
 import "../styles/OrgPage.css";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-
+import { fetchDocument } from "../firebase";
 function OrgPage() {
   const location = useLocation();
   const data = location.state;
 
-  const [festData, setFestData] = useState([]);
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
-    let helper = [];
-    for (const festKey in data.festivals) {
-      const festival = data.festivals[festKey];
-      helper.push(festival);
-    }
+    async function fetchFestival() {
+      const fetched = await fetchDocument(`festivali`, data.festivals);
 
-    setFestData(helper);
+      const append_data = [];
+      for (const festKey in fetched) {
+        append_data.push(fetched[festKey]);
+      }
+
+      setItems(append_data);
+    }
+    fetchFestival();
   }, []);
 
   return (
@@ -30,7 +34,7 @@ function OrgPage() {
         <div className='festivals'>
           <h1 className='festivals-heading'>FESTIVALS</h1>
           <div className='festival-container'>
-            {festData.map((item, index) => (
+            {items.map((item, index) => (
               <FestivalsCard data={item} />
             ))}
           </div>

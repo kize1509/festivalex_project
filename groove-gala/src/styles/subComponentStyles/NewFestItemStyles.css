@@ -1,0 +1,77 @@
+
+
+
+
+
+@media (min-width: 320px) {
+
+    .nf-item{
+        display: flex;
+        flex-direction: row;
+        background-color: #CADCFC;
+        height: 4rem;
+        align-items: center;
+        border-radius: 2.7rem;
+        box-shadow: #EA738D 0px 9px 10px, #EA738D 0px 2px 1px;
+        width: 90%;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        height: 3rem;
+        justify-content: space-between;
+    }
+    .nf-prop-heading{
+        user-select: none;
+        font-family: "Noto Sans JP", sans-serif;
+        color: #EA738D;
+        font-size: 0.7rem;
+    }
+    .nf-prop-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: #EA738D 4px solid;
+        background-color: #00246B;
+        height: 100%;
+        border-radius: 2rem;
+        width: 5rem;
+    }
+    .nf-prop-val{
+        width: 70%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Noto Sans JP", sans-serif;
+        color: #EA738D;
+        background: transparent;
+        outline: none;
+        border: none;
+        font-size: 0.7rem;
+    }
+    .nf-val-container{
+        width: 9rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        height: 100%;
+    }
+}
+
+
+@media (min-width: 438px) {
+
+    .nf-prop-container{
+        width: 40%;
+    }
+
+    .nf-prop-heading{
+        font-size: 1.2rem;
+    }
+    .nf-val-container{
+        width: 60%;
+    }
+    .nf-prop-val{
+        font-size: 1.2rem;
+    }
+}
+
+

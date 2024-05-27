@@ -6,28 +6,24 @@ import Navbar from "../components/Navbar";
 import Foot from "../components/Foot";
 import AdminOrgCard from "../components/AdminOrgCard";
 import { LogIn } from "react-feather";
+import { fetchDocuments } from "../firebase";
 
 function AdminOrg() {
   const location = useLocation();
-  const data = location.state;
 
-  const [items, setItems] = useState(data);
+  const [items, setItems] = useState([]);
 
   const handleDelete = (index) => {
     const newItems = items.filter((item, i) => i !== index);
     setItems(newItems);
   };
 
-  const [festData, setFestData] = useState([]);
-
   useEffect(() => {
-    let helper = [];
-    for (const festKey in data.festivals) {
-      const festival = data.festivals[festKey];
-      helper.push(festival);
+    async function fetchOrganizers() {
+      const fetched = await fetchDocuments(`organizatoriFestivala`);
+      setItems(fetched);
     }
-
-    setFestData(helper);
+    fetchOrganizers();
   }, []);
 
   return (

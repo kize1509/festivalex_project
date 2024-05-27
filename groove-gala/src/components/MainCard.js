@@ -6,13 +6,13 @@ function FestCard({ item }) {
   const navigate = useNavigate();
 
   const data = {
-    name: item.organizer.name,
-    address: item.organizer.address,
-    year: item.organizer.year,
-    logo: item.organizer.logo,
-    telephone: item.organizer.telephone,
-    email: item.organizer.email,
-    festivals: item.festival,
+    name: item.naziv,
+    address: item.adresa,
+    year: item.godinaOsnivanja,
+    logo: item.logo,
+    telephone: item.kontaktTelefon,
+    email: item.email,
+    festivals: item.festivali,
   };
 
   console.log(data);

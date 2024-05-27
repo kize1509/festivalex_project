@@ -5,29 +5,16 @@ import "../styles/Home.css";
 import Search from "../components/Search";
 import { useState } from "react";
 import { useEffect } from "react";
-import jsonData from "../data/data.json";
+import { fetchDocuments } from "../firebase";
 function App() {
-  const [combinedData, setCombinedData] = useState([]);
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
-    const data = [];
-
-    for (const organizerKey in jsonData.organizatoriFestivala) {
-      const organizer = jsonData.organizatoriFestivala[organizerKey];
-
-      const festivalKey = organizer.festivals;
-
-      const festival = jsonData.festivali[festivalKey];
-
-      const combinedItem = {
-        organizer,
-        festival,
-      };
-
-      data.push(combinedItem);
+    async function fetchFestivals() {
+      const data = await fetchDocuments("organizatoriFestivala");
+      setItems(data);
     }
-
-    setCombinedData(data);
+    fetchFestivals();
   }, []);
 
   return (
@@ -38,7 +25,7 @@ function App() {
       </div>
 
       <div className='fest-conatiner'>
-        {combinedData.map((item, index) => (
+        {items.map((item, index) => (
           <MainCard item={item} />
         ))}
       </div>

@@ -7,24 +7,49 @@ import done from "../data/done_FILL0_wght400_GRAD0_opsz24.svg";
 import { useState } from "react";
 import { useEffect } from "react";
 import Dropdown from "./Dropdown.js";
+import { fetchDocument } from "../firebase.js";
+import plus from "../data/plus.svg";
+import { useNavigate } from "react-router-dom";
+import DeleteDialog from "./dialogs/DeleteDialog";
 
 function AdminOrgCard({ org, index, onDelete }) {
   const [festData, setFestData] = useState([]);
 
+  const navigate = useNavigate();
+
+  const handleBtnClick = () => {
+    navigate("/newFestPage", { state: false });
+  };
+
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+
+  const handleDeleteClick = () => {
+    setShowDeleteDialog(true);
+  };
+
+  const handleConfirmDelete = () => {
+    onDelete(index);
+    setShowDeleteDialog(false);
+  };
+
+  const handleCloseDialog = () => {
+    setShowDeleteDialog(false);
+  };
+
   useEffect(() => {
-    const data = [];
-    let fests = jsonData.festivali[org.festivals];
-    for (const festKey in fests) {
-      data.push(fests[festKey].naziv);
+    async function fetchFestivals() {
+      const fetched = await fetchDocument(`festivali`, org.festivali);
+
+      const data = [];
+      for (const festKey in fetched) {
+        data.push(fetched[festKey]);
+      }
+      setFestData(data);
     }
-    setFestData(data);
+    fetchFestivals();
   }, []);
 
   const [inputState, setInputState] = useState(true);
-
-  function handleDelClick() {
-    onDelete(index);
-  }
 
   function toggleStatus() {
     if (inputState) {
@@ -36,7 +61,18 @@ function AdminOrgCard({ org, index, onDelete }) {
 
   return (
     <div className='orgz-container'>
-      <form className='col-org-container'>
+      {showDeleteDialog && (
+        <>
+          <div className='dd-backdrop' onClick={handleCloseDialog}></div>
+          <DeleteDialog
+            text={org.naziv}
+            type={"ORGANIZER"}
+            onClose={handleCloseDialog}
+            onConfirm={handleConfirmDelete}
+          />
+        </>
+      )}
+      <div className='col-org-container'>
         <div className='col-org'>
           <div className='org-data-item'>
             <div className='orgz-prop'>
@@ -44,7 +80,7 @@ function AdminOrgCard({ org, index, onDelete }) {
             </div>
             <input
               className='org-value'
-              placeholder={org.name}
+              placeholder={org.naziv}
               disabled={inputState}
             />
             <img
@@ -66,7 +102,7 @@ function AdminOrgCard({ org, index, onDelete }) {
             </div>
             <input
               className='org-value'
-              placeholder={org.address}
+              placeholder={org.adresa}
               disabled={inputState}
             />
             <img
@@ -88,7 +124,7 @@ function AdminOrgCard({ org, index, onDelete }) {
             </div>
             <input
               className='org-value'
-              placeholder={org.year}
+              placeholder={org.godinaOsnivanja}
               disabled={inputState}
             />
             <img
@@ -112,7 +148,7 @@ function AdminOrgCard({ org, index, onDelete }) {
             </div>
             <input
               className='org-value'
-              placeholder={org.telephone}
+              placeholder={org.kontaktTelefon}
               disabled={inputState}
             />
             <img
@@ -176,10 +212,14 @@ function AdminOrgCard({ org, index, onDelete }) {
         </div>
         <div className='col-org'>
           <Dropdown options={festData} />
+
+          <div className='btn-item'>
+            <img src={plus} className='plus-img' onClick={handleBtnClick} />
+          </div>
         </div>
-      </form>
+      </div>
       <div className='del-edit-ics-org'>
-        <button className='del-btn-org' onClick={handleDelClick}>
+        <button className='del-btn-org' onClick={handleDeleteClick}>
           <img className='del-btn-org-img' src={del} />
         </button>
         <button className='edit-btn-org' onClick={toggleStatus}>

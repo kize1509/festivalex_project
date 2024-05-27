@@ -4,12 +4,18 @@ import UserCard from "../components/UserCard";
 import "../styles/AdminUser.css";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { fetchDocuments } from "../firebase";
 
 function AdminUser() {
-  const location = useLocation();
-  const data = location.state;
+  const [items, setItems] = useState([]);
+  useEffect(() => {
+    async function fetchUsers() {
+      const fetched = await fetchDocuments(`korisnici`);
 
-  const [items, setItems] = useState(data);
+      setItems(fetched);
+    }
+    fetchUsers();
+  }, []);
 
   const handleDelete = (index) => {
     const newItems = items.filter((item, i) => i !== index);

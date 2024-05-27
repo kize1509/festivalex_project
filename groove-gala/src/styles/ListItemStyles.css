@@ -1,0 +1,65 @@
+.item-list-dd{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 40px;
+    box-shadow: #EA738D 0px 5px 15px;
+    background-color: #CADCFC;    
+    height: 3rem;
+}
+
+
+.icons-dd{
+    
+    display: flex;
+    justify-content: center;
+    margin-left: 2%;
+}
+
+.fest-heading-dd{
+
+    border: 4px solid #00246B;
+    margin-left: auto;
+    background-color: #EA738D;  
+    border-radius: 30px;
+    display: flex;
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+}
+
+.heading-dd{
+    font-family: "Noto Sans JP", sans-serif;
+    font-weight: bold;
+    font-size: 0.8rem;
+    color: #00246B;
+    user-select: none;
+}
+
+.icon-dd{
+    width: 30%;
+    cursor: pointer;
+}
+
+@media (min-width: 320px){
+
+        .item-list-dd{
+            width: 100%;
+            height: 2rem;
+        }
+        .heading-dd{
+            font-size: 0.4rem;
+        }
+}
+
+@media (min-width: 468px){
+    .heading-dd{
+        font-size: 0.5rem;
+    }
+    .item-list-dd{
+        width: 100%;
+        height: 2rem;
+    }
+}
