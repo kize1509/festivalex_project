@@ -169,11 +169,11 @@ h3{
 
 .popup-container {
   background: white;
-  padding: 20px;
   width: 40%;
   height: 70%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: start;
   align-items: center;
   border-radius: 18px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);

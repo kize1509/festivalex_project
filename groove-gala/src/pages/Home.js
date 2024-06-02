@@ -5,7 +5,7 @@ import "../styles/Home.css";
 import Search from "../components/Search";
 import { useState } from "react";
 import { useEffect } from "react";
-import { fetchDocuments } from "../firebase";
+import { fetchDocuments } from "../firebaseCom/firebase";
 function App() {
   const [items, setItems] = useState([]);
 

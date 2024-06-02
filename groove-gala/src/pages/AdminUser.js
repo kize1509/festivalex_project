@@ -4,7 +4,7 @@ import UserCard from "../components/UserCard";
 import "../styles/AdminUser.css";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchDocuments } from "../firebase";
+import { fetchDocuments } from "../firebaseCom/firebase";
 
 function AdminUser() {
   const [items, setItems] = useState([]);

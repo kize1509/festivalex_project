@@ -7,7 +7,7 @@ import done from "../data/done_FILL0_wght400_GRAD0_opsz24.svg";
 import { useState } from "react";
 import { useEffect } from "react";
 import Dropdown from "./Dropdown.js";
-import { fetchDocument } from "../firebase.js";
+import { fetchDocument } from "../firebaseCom/firebase.js";
 import plus from "../data/plus.svg";
 import { useNavigate } from "react-router-dom";
 import DeleteDialog from "./dialogs/DeleteDialog";

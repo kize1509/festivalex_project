@@ -1,5 +1,6 @@
 // Import the necessary functions from the Firebase SDK
 import { initializeApp } from "firebase/app";
+import { User, userConverter } from "../models/User";
 import {
   getFirestore,
   collection,
@@ -8,10 +9,8 @@ import {
   where,
   doc,
   getDoc,
+  setDoc,
 } from "firebase/firestore";
-
-// TODO: Replace the following with your app's Firebase project configuration
-// See: https://support.google.com/firebase/answer/7015592
 
 const firebaseConfig = {
   apiKey: "AIzaSyCQlxhbfnu9ilHyUMCACAWgTNYJsJBOa-E",
@@ -53,4 +52,15 @@ async function fetchDocument(endpoint, value) {
   }
 }
 
-export { fetchDocuments, fetchDocument };
+//need to save data to the database, users, organizers, festivals
+
+async function saveUserData(user) {
+  // Set with cityConverter
+  const ref = doc(db, "DATA/JSONDATA/korisnici", user.id).withConverter(
+    userConverter
+  );
+  console.log("User data to save:", user);
+  await setDoc(ref, user);
+}
+
+export { fetchDocuments, fetchDocument, saveUserData };

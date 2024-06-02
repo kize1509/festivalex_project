@@ -6,7 +6,7 @@ import Navbar from "../components/Navbar";
 import Foot from "../components/Foot";
 import AdminOrgCard from "../components/AdminOrgCard";
 import { LogIn } from "react-feather";
-import { fetchDocuments } from "../firebase";
+import { fetchDocuments } from "../firebaseCom/firebase";
 
 function AdminOrg() {
   const location = useLocation();

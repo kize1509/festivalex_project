@@ -5,7 +5,7 @@ import FestivalsCard from "../components/FestivalsCard";
 import "../styles/OrgPage.css";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchDocument } from "../firebase";
+import { fetchDocument } from "../firebaseCom/firebase";
 function OrgPage() {
   const location = useLocation();
   const data = location.state;
