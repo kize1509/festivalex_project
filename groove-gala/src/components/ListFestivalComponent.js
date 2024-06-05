@@ -5,12 +5,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DeleteDialog from "./dialogs/DeleteDialog";
 
-function ListComponent({ data, index, onDelete }) {
-  console.log("LIST COMPONENT ", data);
+function ListComponent({ cluster, data, index, onDelete }) {
   const navigate = useNavigate();
 
   const handleBtnClick = () => {
-    navigate("/newFestPage", { state: data });
+    const data2 = { status: data, cluster: cluster };
+    navigate("/newFestPage", { state: data2 });
   };
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 

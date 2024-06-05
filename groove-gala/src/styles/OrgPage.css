@@ -22,9 +22,26 @@
 
 }
 
+.search-container-fest{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
 
+.search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+}
 
 .festivals-heading{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
     font-family: "Archivo Black", sans-serif;
     font-weight: 200;
     font-style: normal;   
@@ -50,6 +67,8 @@
         justify-content: start;
     }
 
+
+    
    .festivals{
     margin-bottom: 5%;
    }
@@ -64,6 +83,11 @@
 }
 
 @media  screen and (min-width: 768px) {
+
+
+    .search{
+        width: 40%;
+    }
 
     .festivals{
         margin-top: 5%;

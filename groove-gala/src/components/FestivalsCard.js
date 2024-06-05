@@ -29,7 +29,14 @@ function FestivalsCard({ data }) {
         sliderStyle={"slider"}
         imagesStyle={"images"}
       />
-      <h2 className='festivals-title'>{data.naziv}</h2>
+      <h2
+        className='festivals-title'
+        dangerouslySetInnerHTML={{ __html: data.naziv }}
+      />
+      <h5
+        className='festivals-type'
+        dangerouslySetInnerHTML={{ __html: data.tip }}
+      />
       <button className='more-button' onClick={handleButtonClick}>
         LEARN MORE
       </button>

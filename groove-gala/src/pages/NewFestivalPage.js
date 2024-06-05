@@ -13,7 +13,7 @@ function NewFestPage() {
     <div className='festgPage'>
       <Navbar />
       <div className='nf-page-conatiner'>
-        <NewFestCard data={data} />
+        <NewFestCard data={data.status} cluster={data.cluster} />
       </div>
       <Foot />
     </div>

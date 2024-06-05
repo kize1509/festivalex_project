@@ -13,11 +13,9 @@ function Foot() {
   return (
     <div className='footer-container'>
       <div className='links-container'>
-        <a className='foot-links'>LOGIN</a>
         <a className='foot-links' onClick={handleHeadingClick}>
           HOME
         </a>
-        <a className='foot-links'>SIGNUP</a>
       </div>
       <div className='copyright-container'>
         <h3 className='foot-heading' onClick={handleHeadingClick}>

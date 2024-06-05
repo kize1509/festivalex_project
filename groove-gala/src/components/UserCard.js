@@ -3,12 +3,19 @@ import del from "../data/delete.svg";
 import edit from "../data/edit.svg";
 import x from "../data/x.svg";
 import done from "../data/done_FILL0_wght400_GRAD0_opsz24.svg";
-import { useState } from "react";
 import DeleteDialog from "./dialogs/DeleteDialog";
+import { useState } from "react";
+import { deleteUser } from "../firebaseCom/firebase";
 
-function UserCard({ user, index, onDelete }) {
-  const [inputState, setInputState] = useState(true);
-
+function UserCard({
+  user,
+  index,
+  isEditing,
+  editData,
+  onDelete,
+  onEditToggle,
+  onInputChange,
+}) {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
   const handleDeleteClick = () => {
@@ -17,20 +24,13 @@ function UserCard({ user, index, onDelete }) {
 
   const handleConfirmDelete = () => {
     onDelete(index);
+    deleteUser(user.id);
     setShowDeleteDialog(false);
   };
 
   const handleCloseDialog = () => {
     setShowDeleteDialog(false);
   };
-
-  function toggleStatus() {
-    if (inputState) {
-      setInputState(false);
-    } else {
-      setInputState(true);
-    }
-  }
 
   return (
     <div className='user-container'>
@@ -52,19 +52,23 @@ function UserCard({ user, index, onDelete }) {
               <h5 className='prop-head'>USERNAME</h5>
             </div>
             <input
+              name='korisnickoIme'
               className='user-value'
-              placeholder={user.korisnickoIme}
-              disabled={inputState}
+              value={editData.korisnickoIme}
+              onChange={(e) =>
+                onInputChange(index, "korisnickoIme", e.target.value)
+              }
+              disabled={!isEditing}
             />
             <img
               className={`check-x ${
-                inputState ? "active-state" : "inactive-state"
+                !isEditing ? "active-state" : "inactive-state"
               }`}
               src={x}
             />
             <img
               className={`check-done ${
-                inputState ? "inactive-state" : "active-state"
+                !isEditing ? "inactive-state" : "active-state"
               }`}
               src={done}
             />
@@ -74,19 +78,21 @@ function UserCard({ user, index, onDelete }) {
               <h5 className='prop-head'>PASSWORD</h5>
             </div>
             <input
+              name='lozinka'
               className='user-value'
-              placeholder={user.lozinka}
-              disabled={inputState}
+              value={editData.lozinka}
+              onChange={(e) => onInputChange(index, "lozinka", e.target.value)}
+              disabled={!isEditing}
             />
             <img
               className={`check-x ${
-                inputState ? "active-state" : "inactive-state"
+                !isEditing ? "active-state" : "inactive-state"
               }`}
               src={x}
             />
             <img
               className={`check-done ${
-                inputState ? "inactive-state" : "active-state"
+                !isEditing ? "inactive-state" : "active-state"
               }`}
               src={done}
             />
@@ -96,19 +102,21 @@ function UserCard({ user, index, onDelete }) {
               <h5 className='prop-head'>NAME</h5>
             </div>
             <input
+              name='ime'
               className='user-value'
-              placeholder={user.ime}
-              disabled={inputState}
+              value={editData.ime}
+              onChange={(e) => onInputChange(index, "ime", e.target.value)}
+              disabled={!isEditing}
             />
             <img
               className={`check-x ${
-                inputState ? "active-state" : "inactive-state"
+                !isEditing ? "active-state" : "inactive-state"
               }`}
               src={x}
             />
             <img
               className={`check-done ${
-                inputState ? "inactive-state" : "active-state"
+                !isEditing ? "inactive-state" : "active-state"
               }`}
               src={done}
             />
@@ -120,19 +128,21 @@ function UserCard({ user, index, onDelete }) {
               <h5 className='prop-head'>LAST NAME</h5>
             </div>
             <input
+              name='prezime'
               className='user-value'
-              placeholder={user.prezime}
-              disabled={inputState}
+              value={editData.prezime}
+              onChange={(e) => onInputChange(index, "prezime", e.target.value)}
+              disabled={!isEditing}
             />
             <img
               className={`check-x ${
-                inputState ? "active-state" : "inactive-state"
+                !isEditing ? "active-state" : "inactive-state"
               }`}
               src={x}
             />
             <img
               className={`check-done ${
-                inputState ? "inactive-state" : "active-state"
+                !isEditing ? "inactive-state" : "active-state"
               }`}
               src={done}
             />
@@ -142,19 +152,21 @@ function UserCard({ user, index, onDelete }) {
               <h5 className='prop-head'>EMAIL</h5>
             </div>
             <input
+              name='email'
               className='user-value'
-              placeholder={user.email}
-              disabled={inputState}
+              value={editData.email}
+              onChange={(e) => onInputChange(index, "email", e.target.value)}
+              disabled={!isEditing}
             />
             <img
               className={`check-x ${
-                inputState ? "active-state" : "inactive-state"
+                !isEditing ? "active-state" : "inactive-state"
               }`}
               src={x}
             />
             <img
               className={`check-done ${
-                inputState ? "inactive-state" : "active-state"
+                !isEditing ? "inactive-state" : "active-state"
               }`}
               src={done}
             />
@@ -164,19 +176,23 @@ function UserCard({ user, index, onDelete }) {
               <h5 className='prop-head'>DATE OF BIRTH</h5>
             </div>
             <input
+              name='datumRodjenja'
               className='user-value'
-              placeholder={user.datumRodjenja}
-              disabled={inputState}
+              value={editData.datumRodjenja}
+              onChange={(e) =>
+                onInputChange(index, "datumRodjenja", e.target.value)
+              }
+              disabled={!isEditing}
             />
             <img
               className={`check-x ${
-                inputState ? "active-state" : "inactive-state"
+                !isEditing ? "active-state" : "inactive-state"
               }`}
               src={x}
             />
             <img
               className={`check-done ${
-                inputState ? "inactive-state" : "active-state"
+                !isEditing ? "inactive-state" : "active-state"
               }`}
               src={done}
             />
@@ -188,19 +204,21 @@ function UserCard({ user, index, onDelete }) {
               <h5 className='prop-head'>ADDRESS</h5>
             </div>
             <input
+              name='adresa'
               className='user-value'
-              placeholder={user.adresa}
-              disabled={inputState}
+              value={editData.adresa}
+              onChange={(e) => onInputChange(index, "adresa", e.target.value)}
+              disabled={!isEditing}
             />
             <img
               className={`check-x ${
-                inputState ? "active-state" : "inactive-state"
+                !isEditing ? "active-state" : "inactive-state"
               }`}
               src={x}
             />
             <img
               className={`check-done ${
-                inputState ? "inactive-state" : "active-state"
+                !isEditing ? "inactive-state" : "active-state"
               }`}
               src={done}
             />
@@ -210,19 +228,21 @@ function UserCard({ user, index, onDelete }) {
               <h5 className='prop-head'>TELEPHONE</h5>
             </div>
             <input
+              name='telefon'
               className='user-value'
-              placeholder={user.telefon}
-              disabled={inputState}
+              value={editData.telefon}
+              onChange={(e) => onInputChange(index, "telefon", e.target.value)}
+              disabled={!isEditing}
             />
             <img
               className={`check-x ${
-                inputState ? "active-state" : "inactive-state"
+                !isEditing ? "active-state" : "inactive-state"
               }`}
               src={x}
             />
             <img
               className={`check-done ${
-                inputState ? "inactive-state" : "active-state"
+                !isEditing ? "inactive-state" : "active-state"
               }`}
               src={done}
             />
@@ -232,19 +252,23 @@ function UserCard({ user, index, onDelete }) {
               <h5 className='prop-head'>PROFESSION</h5>
             </div>
             <input
+              name='zanimanje'
               className='user-value'
-              placeholder={user.zanimanje}
-              disabled={inputState}
+              value={editData.zanimanje}
+              onChange={(e) =>
+                onInputChange(index, "zanimanje", e.target.value)
+              }
+              disabled={!isEditing}
             />
             <img
               className={`check-x ${
-                inputState ? "active-state" : "inactive-state"
+                !isEditing ? "active-state" : "inactive-state"
               }`}
               src={x}
             />
             <img
               className={`check-done ${
-                inputState ? "inactive-state" : "active-state"
+                !isEditing ? "inactive-state" : "active-state"
               }`}
               src={done}
             />
@@ -255,7 +279,7 @@ function UserCard({ user, index, onDelete }) {
         <button className='del-btn' onClick={handleDeleteClick}>
           <img className='del-btn-img' src={del} />
         </button>
-        <button className='edit-btn' onClick={toggleStatus}>
+        <button className='edit-btn' onClick={() => onEditToggle(index)}>
           <img className='edit-btn-img' src={edit} />
         </button>
       </div>

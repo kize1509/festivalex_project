@@ -1,0 +1,55 @@
+
+
+@media screen and (min-width: 320px){
+
+    
+    .image-link-item{
+        display: flex;
+        align-items: center;
+        background-color: #EA738D;
+        border-radius: 2rem;
+        margin-top: 2%;
+        height: 3rem;
+        width: 80%;
+        box-shadow: #CADCFC 0px 9px 20px, #EA738D 0px 4px 112px;
+
+    }
+
+        .image-link-text{
+            color: white;
+            border: 3px solid #CADCFC;
+            height: 100%;
+            border-radius: 2rem;
+            width: 70%;
+            background-color: #00246B;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            
+        }
+
+        .image-link-text p{
+            font-family: "Noto Sans JP", sans-serif;
+            font-size: 0.6rem;
+            user-select: none;
+            width: 80%;
+        }
+
+        .image-link-del {
+            margin-right: 2%;
+            margin-left: auto;
+
+        }
+        .image-link-del img{
+            width: 60%;
+            transition: all 0.4s ease;
+
+        
+        }
+
+        .image-link-del img:hover{
+            transform: scale(1.5);
+        }
+        
+}

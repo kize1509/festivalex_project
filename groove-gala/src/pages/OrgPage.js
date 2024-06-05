@@ -6,11 +6,13 @@ import "../styles/OrgPage.css";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchDocument } from "../firebaseCom/firebase";
+import Search from "../components/Search";
 function OrgPage() {
   const location = useLocation();
   const data = location.state;
 
   const [items, setItems] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     async function fetchFestival() {
@@ -26,6 +28,12 @@ function OrgPage() {
     fetchFestival();
   }, []);
 
+  const filteredItems = items.filter(
+    (item) =>
+      item.naziv.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.tip.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className='orgPage'>
       <Navbar />
@@ -33,9 +41,15 @@ function OrgPage() {
         <OrgCard data={data} />
         <div className='festivals'>
           <h1 className='festivals-heading'>FESTIVALS</h1>
+          <div className='search-container-fest'>
+            <Search setSearchQuery={setSearchQuery} />
+          </div>
           <div className='festival-container'>
-            {items.map((item, index) => (
-              <FestivalsCard data={item} />
+            {filteredItems.map((item, index) => (
+              <FestivalsCard
+                data={highlightSearchTerm(item, searchQuery)}
+                key={index}
+              />
             ))}
           </div>
         </div>
@@ -43,6 +57,27 @@ function OrgPage() {
       <Foot />
     </div>
   );
+}
+
+function highlightSearchTerm(item, searchTerm) {
+  if (!searchTerm) return item;
+
+  const regex = new RegExp(`(${searchTerm})`, "gi");
+
+  const highlightedNaziv = item.naziv.replace(
+    regex,
+    "<span class='highlight'>$1</span>"
+  );
+  const highlightedTip = item.tip.replace(
+    regex,
+    "<span class='highlight'>$1</span>"
+  );
+
+  return {
+    ...item,
+    naziv: highlightedNaziv,
+    tip: highlightedTip,
+  };
 }
 
 export default OrgPage;

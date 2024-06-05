@@ -24,7 +24,10 @@ function FestCard({ item }) {
   return (
     <div className='FestCard' onClick={handleCardClick}>
       <img src={data.logo} className='fest-image' alt='festival' />
-      <h2 className='fest-title'>{data.name}</h2>
+      <h2
+        className='fest-title'
+        dangerouslySetInnerHTML={{ __html: item.naziv }}
+      />
       <p className='fest-description'>
         {data.email}
         <br />

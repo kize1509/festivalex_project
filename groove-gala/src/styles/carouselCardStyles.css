@@ -11,6 +11,11 @@
     margin-top: auto;
 }
 
+.highlight {
+    background-color: #EA738D;
+    font-weight: bold;
+  }
+
 .festivals-card{
     height: 350px;
     border: 3px solid #EA738D;
@@ -35,19 +40,38 @@
   transform: scale(1.05);
 }
 
+
+
+.festivals-type{
+    display: flex;
+    justify-content: center ;
+    align-items: center;
+    font-family: "Noto JP", sans-serif;
+    font-weight: 100;
+    font-style: normal;   
+    color: #fdfdfe;
+    cursor: pointer;
+    user-select: none;
+    font-size: 0.8rem;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    width: 100%;
+}
+
+
 .more-button {
 
     background-color: #CADCFC;
     border: 2px solid #EA738D;
-    border-radius: 30px;
+    border-radius: 2rem;
     box-shadow: #EA738D 4px 4px 0 0;
     color: #EA738D;
     cursor: pointer;
     display: inline-block;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 1rem;
     padding: 0 18px;
-    line-height: 50px;
+    line-height: 2.3rem;
     text-align: center;
     text-decoration: none;
     user-select: none;
@@ -90,10 +114,13 @@
     }
 
     .festivals-title{
-        margin: 5%;
+        margin-top: 5%;
     }
+
+
     .more-button{
-        margin-bottom: 5%;
+        
+        margin-bottom: 2%;
 
     }
 

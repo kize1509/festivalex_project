@@ -6,10 +6,11 @@ import work from "../data/work.svg";
 import phone from "../data/phone.svg";
 import date from "../data/date.svg";
 import address from "../data/address.svg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { saveUserData } from "../firebaseCom/firebase";
+import { saveUserData, fetchDocuments } from "../firebaseCom/firebase";
 import { User } from "../models/User";
+import DoneAction from "./dialogs/DoneAction";
 import charactersJson from "../data/constants.json";
 
 const generateRandomId = (length = 19) => {
@@ -21,10 +22,19 @@ const generateRandomId = (length = 19) => {
   return result;
 };
 
-function LoginSignup({ data }) {
-  const [action, setAction] = useState(data);
+function LoginSignup({
+  onLogin,
+  onClose,
+  onSub,
+  setTitle,
+  currName,
+  onFailLogin,
+}) {
+  const [action, setAction] = useState(currName);
+  const [items, setItems] = useState([]);
   const navigate = useNavigate();
   const [generatedId, setGeneratedId] = useState("");
+
   const [formData, setFormData] = useState({
     username: "",
     name: "",
@@ -36,6 +46,14 @@ function LoginSignup({ data }) {
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    async function fetchUsers() {
+      const fetched = await fetchDocuments(`korisnici`);
+      setItems(fetched);
+    }
+    fetchUsers();
+  }, []);
 
   const handleGenerateId = () => {
     const newId = "-" + generateRandomId();
@@ -54,10 +72,104 @@ function LoginSignup({ data }) {
     });
   };
 
-  const handleInvalid = (e) => {
-    e.target.setCustomValidity(
-      `Please fill out the ${e.target.placeholder.toLowerCase()} field.`
-    );
+  const validateData = () => {
+    const data = {
+      korisnickoIme: formData.username,
+      lozinka: formData.password,
+      ime: formData.name,
+      prezime: formData.lastName,
+      email: formData.email,
+      datumRodjenja: formData.birthdate,
+      adresa: formData.address,
+      telefon: formData.phoneNumber,
+      zanimanje: formData.occupation,
+    };
+
+    if (
+      !data.korisnickoIme ||
+      !data.lozinka ||
+      !data.ime ||
+      !data.prezime ||
+      !data.email ||
+      !data.datumRodjenja ||
+      !data.adresa ||
+      !data.telefon ||
+      !data.zanimanje
+    ) {
+      alert("All fields are required.");
+      return false;
+    }
+
+    const isUsernameUnique = items.every((item, i) => {
+      return item.korisnickoIme !== data.korisnickoIme;
+    });
+    if (!isUsernameUnique) {
+      alert("Username already exists.");
+      return false;
+    }
+
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    if (!data.lozinka.match(passwordRegex)) {
+      alert(
+        "Password must contain at least 8 characters, including letters and numbers."
+      );
+      return false;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!data.email.match(emailRegex)) {
+      alert("Invalid email address.");
+      return false;
+    }
+
+    if (!validateDatumRodjenja(data.datumRodjenja)) {
+      alert("Invalid birth date format.");
+      return false;
+    }
+
+    const addressRegex = /^[a-zA-Z0-9šđžćč\s]+,\s*[a-zA-Zšđžćč\s]+,\s*\d{5}$/;
+    if (!data.adresa.match(addressRegex)) {
+      alert(
+        "Invalid address format. Please use: Street Address, City, Postal Code"
+      );
+      return false;
+    }
+
+    const phoneRegex = /^06[0-6]\d{6,7}$/;
+    if (!data.telefon.match(phoneRegex)) {
+      console.log(data.telefon);
+      alert("Invalid Serbian mobile phone number format.");
+      return false;
+    }
+
+    return true;
+  };
+
+  const validateDatumRodjenja = (datumRodjenja) => {
+    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+
+    if (!dateRegex.test(datumRodjenja)) {
+      return false;
+    }
+
+    const [year, month, day] = datumRodjenja.split("-").map(Number);
+
+    const date = new Date(year, month - 1, day);
+
+    if (isNaN(date.getTime())) {
+      return false;
+    }
+
+    const [parsedYear, parsedMonth, parsedDay] = [
+      date.getFullYear(),
+      date.getMonth() + 1,
+      date.getDate(),
+    ];
+    if (year !== parsedYear || month !== parsedMonth || day !== parsedDay) {
+      return false;
+    }
+
+    return true;
   };
 
   const handleInput = (e) => {
@@ -66,9 +178,29 @@ function LoginSignup({ data }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (action === "Login") {
-      console.log("Logging in with", formData);
+      let isIn = false;
+      items.forEach((element) => {
+        if (
+          element.email == formData.email &&
+          element.lozinka == formData.password
+        ) {
+          isIn = true;
+        }
+      });
+      if (isIn) {
+        onClose();
+        setTitle("LOGGING IN");
+        onSub();
+        onLogin(formData.email);
+        return;
+      }
+      onFailLogin();
     } else {
+      if (!validateData()) {
+        return;
+      }
       const user = new User(
         generatedId,
         formData.address,
@@ -81,8 +213,11 @@ function LoginSignup({ data }) {
         formData.phoneNumber,
         formData.occupation
       );
+      setTitle("SIGNIG UP");
+      onSub();
       saveUserData(user);
-      console.log("Signing up with", formData);
+      onClose();
+      return;
     }
   };
 
@@ -104,7 +239,6 @@ function LoginSignup({ data }) {
                 placeholder='Username'
                 value={formData.username}
                 onChange={handleChange}
-                onInvalid={handleInvalid}
                 onInput={handleInput}
                 required
               />
@@ -118,7 +252,6 @@ function LoginSignup({ data }) {
                 placeholder='Name'
                 value={formData.name}
                 onChange={handleChange}
-                onInvalid={handleInvalid}
                 onInput={handleInput}
                 required
               />
@@ -132,7 +265,6 @@ function LoginSignup({ data }) {
                 placeholder='Last Name'
                 value={formData.lastName}
                 onChange={handleChange}
-                onInvalid={handleInvalid}
                 onInput={handleInput}
                 required
               />
@@ -146,7 +278,6 @@ function LoginSignup({ data }) {
                 placeholder='Birthdate'
                 value={formData.birthdate}
                 onChange={handleChange}
-                onInvalid={handleInvalid}
                 onInput={handleInput}
                 required
               />
@@ -160,7 +291,6 @@ function LoginSignup({ data }) {
                 placeholder='Address'
                 value={formData.address}
                 onChange={handleChange}
-                onInvalid={handleInvalid}
                 onInput={handleInput}
                 required
               />
@@ -174,7 +304,6 @@ function LoginSignup({ data }) {
                 placeholder='Phone Number'
                 value={formData.phoneNumber}
                 onChange={handleChange}
-                onInvalid={handleInvalid}
                 onInput={handleInput}
                 required
               />
@@ -188,7 +317,6 @@ function LoginSignup({ data }) {
                 placeholder='Occupation'
                 value={formData.occupation}
                 onChange={handleChange}
-                onInvalid={handleInvalid}
                 onInput={handleInput}
                 required
               />
@@ -205,7 +333,6 @@ function LoginSignup({ data }) {
             placeholder='Email'
             value={formData.email}
             onChange={handleChange}
-            onInvalid={handleInvalid}
             onInput={handleInput}
             required
           />
@@ -219,7 +346,6 @@ function LoginSignup({ data }) {
             placeholder='Password'
             value={formData.password}
             onChange={handleChange}
-            onInvalid={handleInvalid}
             onInput={handleInput}
             required
           />
@@ -240,13 +366,17 @@ function LoginSignup({ data }) {
       <div className='submit-container'>
         <div
           className={action === "Login" ? "submit gray" : "submit"}
-          onClick={() => setAction("Sign Up")}
+          onClick={() => {
+            setAction("Sign Up");
+          }}
         >
           Sign Up
         </div>
         <div
           className={action === "Sign Up" ? "submit gray" : "submit"}
-          onClick={() => setAction("Login")}
+          onClick={() => {
+            setAction("Login");
+          }}
         >
           Login
         </div>

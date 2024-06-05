@@ -164,7 +164,7 @@ h3{
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index:100;
 }
 
 .popup-container {
@@ -189,6 +189,71 @@ h3{
     width: 80%;
     height: 70%;
   }
+  .nav-container{
+    justify-content: space-between;
+  }
+
+  .nav-list{
+    
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin: 0;
+    width: 100%;
+  }
+  .loggedin-nav{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .logged-in-cntr{
+    background-color: #00246B ;
+    border-radius: 1rem;
+    height: 2rem;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+  }
+  .logged-in-head{
+    margin-left: 3%;
+    user-select: none;
+    font-size: 0.7rem;
+    font-family: "Noto Sans JP", sans-serif;
+    color: #CADCFC;
+  }
+
+  .logged-in-val{
+    background-color: #CADCFC;
+    user-select: none;
+    margin-left: auto;
+    font-family: "Noto Sans JP", sans-serif;
+    color: #EA738D;
+    font-size: 0.7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #EA738D;
+    border-radius: 1rem;
+    width: 60%;
+    height: 100%;
+  }
+  .logoutButton{
+    font-weight: 600;
+    margin-top: 1rem;
+    width: 80%;
+    font-family: "Noto Sans JP", sans-serif;
+    background-color: #EA738D;
+    border-radius: 2rem;
+    color: #CADCFC;
+    height: 2rem;
+    border: 3px solid #00246B;
+    cursor: pointer ;
+  }
+
 }
 
 
@@ -198,25 +263,72 @@ h3{
     width: 80%;
     height: 60%;
   }
+
+  .nav-list{
+    width: 80%;
+  }
+}
+
+@media screen and (min-width: 550px) {
+  
+
+  .nav-list{
+    width: 60%;
+  }
 }
 
 @media screen and (min-width: 768px) {
   .popup-container{
     width: 70%;
     height: 55%;
-  }}
+  }
+  .loggedin-nav{
+    align-items: end;
+  }
+  .nav-container{
+    justify-content: space-around;
+  }
+
+  .logged-in-cntr{
+    margin-top: 0.1rem;
+  }
+  .logoutButton{
+    width: 30%;
+    margin-top: 0.5rem;
+  }
+}
 
 @media screen and (min-width: 992px) {
   .popup-container{
     width: 60%;
     height: 52%;
-  }}
+  }
+
+  .logged-in-cntr{
+  width: 60%;
+}
+
+.logoutButton{
+  width: 20%;
+ 
+}
+
+
+}
 
 @media screen and (min-width: 1200px) {
   .popup-container{
     width: 50%;
     height: 72%
-  }}
+  }
+
+  .logged-in-cntr{
+    width: 60%;
+  }
+  
+
+
+}
 
 @media screen and(min-width: 1440px) {
   .popup-container{

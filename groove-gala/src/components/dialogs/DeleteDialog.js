@@ -6,7 +6,7 @@ function DeleteDialog({ text, type, onClose, onConfirm }) {
     <div className='dd-main-container'>
       <div className='dd-item-container'>
         <div className='dd-heading-container'>
-          <label className='dd-delete-label'>YOU HAVE DELETED</label>
+          <label className='dd-delete-label'>TO DELETE PRESS CHECKMARK</label>
           <label className='dd-delete-items-val'>{text}</label>
           <label className='dd-delete-items'>{type}</label>
         </div>

@@ -1,15 +1,29 @@
+import React, { useEffect, useState } from "react";
 import ImageSlider from "./Carousel";
-import { useRef } from "react";
-import "../styles/newFestCardStyles.css";
 import NewFestItem from "./subComponents/NewFestItem";
-import { useEffect, useState } from "react";
 import plus from "../data/plus.svg";
 import done from "../data/done.svg";
-import { color } from "framer-motion";
+import { saveFestData } from "../firebaseCom/firebase";
+import "../styles/newFestCardStyles.css";
+import DoneAction from "./dialogs/DoneAction";
+import ImageLinkItem from "./subComponents/ImageLinkItem";
+import charactersJson from "../data/constants.json";
+import { LogIn } from "react-feather";
 
-function NewFestCard({ data }) {
+const generateRandomId = (length = 19) => {
+  const characters = charactersJson.characters;
+  let result = "";
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return result;
+};
+
+function NewFestCard({ data, cluster }) {
+  const [pageState, setPageState] = useState("add");
   const [imageCollection, setImageCollection] = useState([]);
-
+  const [showModal, setShowModal] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
   const [dataState, setDataState] = useState({
     naziv: "",
     cena: "",
@@ -20,44 +34,150 @@ function NewFestCard({ data }) {
     slike: [],
   });
 
-  const fileInputRef = useRef(null);
-
   useEffect(() => {
     if (data) {
+      setPageState("edit");
       setDataState(data);
       const imdata = data.slike ? [...data.slike] : [];
       setImageCollection(imdata);
     }
   }, [data]);
-  const handleImageClick = () => {
-    fileInputRef.current.click();
+
+  const handleInputChange = (name, value) => {
+    setDataState((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    const data = imageCollection;
-    data.push(file);
-    setImageCollection(data);
-    console.log(imageCollection);
-    console.log("Selected file:", file);
+  const validateInputs = () => {
+    if (
+      !dataState.naziv ||
+      !dataState.cena ||
+      !dataState.tip ||
+      !dataState.prevoz ||
+      !dataState.maxOsoba ||
+      !dataState.opis ||
+      imageCollection.length === 0
+    ) {
+      alert("All fields are required.");
+      return false;
+    }
+
+    if (isNaN(parseInt(dataState.cena)) || parseInt(dataState.cena) <= 0) {
+      alert("Price must be a positive integer.");
+      return false;
+    }
+
+    if (
+      isNaN(parseInt(dataState.maxOsoba)) ||
+      parseInt(dataState.maxOsoba) <= 0
+    ) {
+      alert("Maximum number of people must be a positive integer.");
+      return false;
+    }
+    for (const imageUrl of imageCollection) {
+      if (!isValidImageUrl(imageUrl)) {
+        alert("ENTERED AND INVALID IMAGE URL.");
+        return false;
+      }
+    }
+
+    return true;
+  };
+
+  const isValidImageUrl = (url) => {
+    // Basic check for valid image URL
+    return url.match(/\.(jpeg|jpg|gif|png|webp)$/) != null;
+  };
+
+  const handleSave = () => {
+    if (!validateInputs()) {
+      return;
+    }
+
+    const newFestivalId = generateNewFestivalId();
+
+    const festData = {
+      cena: dataState.cena,
+      maxOsoba: dataState.maxOsoba,
+      naziv: dataState.naziv,
+      opis: dataState.opis,
+      prevoz: dataState.prevoz,
+      slike: imageCollection,
+      tip: dataState.tip,
+    };
+
+    if (pageState === "add") {
+      const hd = { [newFestivalId]: festData };
+      saveFestData(hd, cluster);
+      handleOpenModal();
+    } else {
+      const hd = { [data.id]: festData };
+      saveFestData(hd, cluster);
+      handleOpenModal();
+    }
+  };
+
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const generateNewFestivalId = () => {
+    return "-" + generateRandomId();
+  };
+
+  const handleImageDelete = (index) => {
+    const newItems = imageCollection.filter((item, i) => i !== index);
+    setImageCollection(newItems);
+  };
+
+  const handleAddImage = () => {
+    if (imageUrl) {
+      setImageCollection((prevImages) => [...prevImages, imageUrl]);
+      setImageUrl("");
+    }
   };
 
   return (
     <div className='nf-container'>
-      <div className='nf-col-container'>
+      <DoneAction
+        show={showModal}
+        handleClose={handleCloseModal}
+        title={pageState === "add" ? "ADDING FESTIVAL" : "EDITING FESTIVAL"}
+      />
+      <form className='nf-col-container'>
         <div className='nf-basic-info'>
-          <NewFestItem name={"NAME"} value={dataState.naziv} tp={"text"} />
-          <NewFestItem name={"PRICE"} value={dataState.cena} tp={"text"} />
-          <NewFestItem name={"TYPE"} value={dataState.tip} tp={"text"} />
           <NewFestItem
-            name={"TRAVEL TYPE"}
-            value={dataState.prevoz}
+            name={"naziv"}
+            value={dataState.naziv}
             tp={"text"}
+            onInputChange={handleInputChange}
           />
           <NewFestItem
-            name={"MAX PEOPLE"}
+            name={"cena"}
+            value={dataState.cena}
+            tp={"text"}
+            onInputChange={handleInputChange}
+          />
+          <NewFestItem
+            name={"tip"}
+            value={dataState.tip}
+            tp={"text"}
+            onInputChange={handleInputChange}
+          />
+          <NewFestItem
+            name={"prevoz"}
+            value={dataState.prevoz}
+            tp={"text"}
+            onInputChange={handleInputChange}
+          />
+          <NewFestItem
+            name={"maxOsoba"}
             value={dataState.maxOsoba}
             tp={"text"}
+            onInputChange={handleInputChange}
           />
         </div>
         <div className='nf-caption'>
@@ -66,7 +186,10 @@ function NewFestCard({ data }) {
           </div>
           <div className='nf-caption-field'>
             <textarea
-              placeholder={dataState.opis}
+              name='opis'
+              placeholder='Enter description'
+              value={dataState.opis}
+              onChange={(e) => handleInputChange("opis", e.target.value)}
               rows={4}
               cols={40}
               className='nf-caption-input'
@@ -74,40 +197,41 @@ function NewFestCard({ data }) {
           </div>
         </div>
         <div className='nf-photos'>
-          {imageCollection.length > 0 ? (
-            <ImageSlider
-              images={imageCollection}
-              sliderStyle={"slider-nf"}
-              imagesStyle={"images"}
+          {imageCollection.map((link, index) => (
+            <ImageLinkItem
+              key={index}
+              index={index}
+              link={link}
+              onDel={handleImageDelete}
             />
-          ) : (
-            <div
-              style={{
-                marginBottom: "0.5%",
-                color: "white",
-                fontFamily: "Noto Sans JP, sans-serif",
-              }}
-            >
-              NO IMAGES
-            </div>
-          )}
-
+          ))}
+          <div
+            style={{
+              marginTop: "1%",
+              marginBottom: "0.5%",
+              color: "white",
+              fontFamily: "Noto Sans JP, sans-serif",
+            }}
+          >
+            ADD IMAGE LINK
+          </div>
           <div className='nf-add-photos'>
             <input
-              type='file'
+              type='url'
               className='nf-image-add'
-              ref={fileInputRef}
-              onChange={handleFileChange}
+              placeholder='Enter image URL'
+              value={imageUrl}
+              onChange={(e) => setImageUrl(e.target.value)}
             />
-            <img src={plus} className='nf-plus' onClick={handleImageClick} />
+            <p onClick={handleAddImage}>ADD</p>
           </div>
         </div>
         <div className='nf-save'>
-          <div className='nf-save-btn'>
-            <img className='nf-save-img' src={done} />
+          <div className='nf-save-btn' onClick={handleSave}>
+            <img className='nf-save-img' src={done} alt='Save' />
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 }

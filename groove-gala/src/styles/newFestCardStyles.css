@@ -3,7 +3,15 @@
 
 
 .nf-image-add{
-    display: none;
+    display: flex;
+    width: 80%;
+    background:none;
+    outline: none;
+    border: none;
+    font-size: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    color: white;
 }
 
 
@@ -116,22 +124,23 @@
         width: 90%;
         margin-top: 2rem;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
+        overflow-y: scroll;
     }
     .nf-add-photos{
         background-color: #EA738D;
-  border-radius: 2rem;
+        border-radius: 2rem;
   box-shadow: #EA738D 0px 9px 20px, #CADCFC 0px 4px 112px;
   transition: transform 0.4s ease;
-        height: 2rem;
-        margin: 0;
-        margin-top: 0.8rem;
-        width: 50%;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
+  height: 2rem;
+  margin: 0;
+  margin-top: 0.8rem;
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2%;
     }
 
     .nf-add-photos:hover{
@@ -168,6 +177,13 @@
   }
   
   @media (min-width: 438px) {
+
+
+    .nf-add-photos p{
+        font-size: 1.5rem;
+        color: #CADCFC;
+        user-select: none;
+    }
 
     .nf-add-photos{
         height: 4rem;

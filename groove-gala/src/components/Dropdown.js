@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import "../styles/DropDownStyles.css";
 import ListComponent from "./ListFestivalComponent";
 import dropdown from "../data/dropdown.svg";
-
-function Dropdown({ options }) {
+import { deleteFest } from "../firebaseCom/firebase";
+function Dropdown({ options, cluster }) {
   const [items, setItems] = useState([]);
   const [isActive, setIsActive] = useState(false);
 
@@ -12,6 +12,7 @@ function Dropdown({ options }) {
   }, [options]);
 
   const handleDelete = (index) => {
+    deleteFest(cluster, items[index].id);
     const newItems = items.filter((item, i) => i !== index);
     setItems(newItems);
   };
@@ -29,6 +30,7 @@ function Dropdown({ options }) {
           {items.map((option, index) => (
             <div className='dropdown-item'>
               <ListComponent
+                cluster={cluster}
                 data={option}
                 index={index}
                 onDelete={handleDelete}
