@@ -22,6 +22,59 @@
 
 }
 
+.filter-btns-fest{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.btn-type{
+    margin-right: 5%;
+    background-color: #EA738D;
+    border: 2px solid #00246B;
+    border-radius: 2rem;
+    box-shadow: #00246B 4px 4px 0 0;
+    color: #00246B;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0 1rem;
+    line-height: 3rem;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.btn-name{
+    margin-right: 2%;
+    background-color: #EA738D;
+    border: 2px solid #00246B;
+    border-radius: 2rem;
+    box-shadow: #00246B 4px 4px 0 0;
+    color: #00246B;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0 1rem;
+    line-height: 3rem;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.btn-type.active,
+.btn-name.active,.btn-type:active,
+.btn-name:active {
+    box-shadow: #00246B 2px 2px 0 0;
+    transform: translate(2px, 2px);
+}
+
 .search-container-fest{
     margin-top: 2rem;
     display: flex;
@@ -54,6 +107,9 @@
     margin-top: 5%;
 }
 
+.search{
+    width: 50%;
+}
 
 .festival-container{
     width: 100%;
@@ -68,7 +124,9 @@
     }
 
 
-    
+    .search-container-fest{
+        justify-content: space-around   ;
+    }
    .festivals{
     margin-bottom: 5%;
    }
@@ -80,12 +138,24 @@
         justify-content: center;
         align-items: center;
      }
+
+
+    .btn-type, .btn-name{
+
+        font-size: 0.7rem;
+        line-height: 2.5rem;
+    }
+
+    .btn-name{
+        margin-left: 0rem;
+    
+    }
 }
 
 @media  screen and (min-width: 768px) {
 
 
-    .search{
+    .search{                                                                
         width: 40%;
     }
 

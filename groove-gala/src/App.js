@@ -5,7 +5,6 @@ import AdminPage from "./pages/AdminPage.js";
 import AdminUser from "./pages/AdminUser.js";
 import AdminOrg from "./pages/AdminOrg.js";
 import NewFestPage from "./pages/NewFestivalPage.js";
-
 import {
   BrowserRouter as Router,
   Routes,
@@ -26,6 +25,7 @@ function App() {
         <Route path='/adminUser' element={<AdminUser />}></Route>
         <Route path='/adminOrg' element={<AdminOrg />}></Route>
         <Route path='/newFestPage' element={<NewFestPage />}></Route>
+        <Route path='*' element={<Navigate to='/' />}></Route>
       </Routes>
     </Router>
   );

@@ -165,6 +165,7 @@ function LoginSignup({
       date.getMonth() + 1,
       date.getDate(),
     ];
+
     if (year !== parsedYear || month !== parsedMonth || day !== parsedDay) {
       return false;
     }

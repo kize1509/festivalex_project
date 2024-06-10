@@ -7,12 +7,15 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchDocument } from "../firebaseCom/firebase";
 import Search from "../components/Search";
+
 function OrgPage() {
   const location = useLocation();
   const data = location.state;
 
   const [items, setItems] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchByType, setSearchByType] = useState(false);
+  const [searchByName, setSearchByName] = useState(false);
 
   useEffect(() => {
     async function fetchFestival() {
@@ -28,11 +31,29 @@ function OrgPage() {
     fetchFestival();
   }, []);
 
-  const filteredItems = items.filter(
-    (item) =>
-      item.naziv.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.tip.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const handleTypeClick = () => {
+    setSearchByType((prev) => !prev);
+  };
+
+  const handleNameClick = () => {
+    setSearchByName((prev) => !prev);
+  };
+
+  const filteredItems = items.filter((item) => {
+    const searchLower = searchQuery.toLowerCase();
+    const matchesName = item.naziv.toLowerCase().includes(searchLower);
+    const matchesType = item.tip.toLowerCase().includes(searchLower);
+
+    if (searchByType && searchByName) {
+      return matchesName || matchesType;
+    } else if (searchByType) {
+      return matchesType;
+    } else if (searchByName) {
+      return matchesName;
+    } else {
+      return matchesName || matchesType;
+    }
+  });
 
   return (
     <div className='orgPage'>
@@ -43,11 +64,31 @@ function OrgPage() {
           <h1 className='festivals-heading'>FESTIVALS</h1>
           <div className='search-container-fest'>
             <Search setSearchQuery={setSearchQuery} />
+
+            <div className='filter-btns-fest'>
+              <button
+                className={`btn-type ${searchByType ? "active" : ""}`}
+                onClick={handleTypeClick}
+              >
+                type
+              </button>
+              <button
+                className={`btn-name ${searchByName ? "active" : ""}`}
+                onClick={handleNameClick}
+              >
+                name
+              </button>
+            </div>
           </div>
           <div className='festival-container'>
             {filteredItems.map((item, index) => (
               <FestivalsCard
-                data={highlightSearchTerm(item, searchQuery)}
+                data={highlightSearchTerm(
+                  item,
+                  searchQuery,
+                  searchByName,
+                  searchByType
+                )}
                 key={index}
               />
             ))}
@@ -59,25 +100,50 @@ function OrgPage() {
   );
 }
 
-function highlightSearchTerm(item, searchTerm) {
+function highlightSearchTerm(item, searchTerm, searchByName, searchByType) {
   if (!searchTerm) return item;
 
   const regex = new RegExp(`(${searchTerm})`, "gi");
 
-  const highlightedNaziv = item.naziv.replace(
-    regex,
-    "<span class='highlight'>$1</span>"
-  );
-  const highlightedTip = item.tip.replace(
-    regex,
-    "<span class='highlight'>$1</span>"
-  );
+  if ((searchByType && searchByName) || (!searchByType && !searchByName)) {
+    const highlightedNaziv = item.naziv.replace(
+      regex,
+      "<span class='highlight'>$1</span>"
+    );
+    const highlightedTip = item.tip.replace(
+      regex,
+      "<span class='highlight'>$1</span>"
+    );
+    return {
+      ...item,
+      naziv: highlightedNaziv,
+      tip: highlightedTip,
+    };
+  } else if (searchByType) {
+    const highlightedNaziv = item.naziv;
+    const highlightedTip = item.tip.replace(
+      regex,
+      "<span class='highlight'>$1</span>"
+    );
 
-  return {
-    ...item,
-    naziv: highlightedNaziv,
-    tip: highlightedTip,
-  };
+    return {
+      ...item,
+      naziv: highlightedNaziv,
+      tip: highlightedTip,
+    };
+  } else if (searchByName) {
+    const highlightedNaziv = item.naziv.replace(
+      regex,
+      "<span class='highlight'>$1</span>"
+    );
+    const highlightedTip = item.tip;
+
+    return {
+      ...item,
+      naziv: highlightedNaziv,
+      tip: highlightedTip,
+    };
+  }
 }
 
 export default OrgPage;
