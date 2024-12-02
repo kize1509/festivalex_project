@@ -28,7 +28,7 @@ A React-based, fully responsive festival website designed to provide a seamless 
 - **npm** or **yarn**
 
 ### Installation
-1. Clone the repository:
+1. Clone the repository
 
 
 Navigate to the project directory:
