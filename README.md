@@ -29,10 +29,11 @@ A React-based, fully responsive festival website designed to provide a seamless 
 
 ### Installation
 1. Clone the repository:
-   ```bash
+
+
 Navigate to the project directory:
 
-cd festival-website
+cd groove-gala
 
 Install dependencies:
 
@@ -53,10 +54,10 @@ Running the Application
 🛠️ Technologies Used
 
     Frontend: React.js
-    State Management: React Context API (or Redux, if applicable)
-    Styling: CSS modules (or styled-components, SCSS, etc.)
+    State Management: React Context API 
+    Styling: CSS modules 
     Routing: React Router
-    API Integration: Axios (or Fetch API
+    API Integration: firebase
     
 🎨 Design Philosophy
 
